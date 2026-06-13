@@ -1,6 +1,7 @@
 package com.company.managementSystem.model;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DataReport<R> {
@@ -10,7 +11,9 @@ public class DataReport<R> {
     private String nameFile;
     private List<R> rows;
 
-    public DataReport(){}
+    public DataReport(){
+        columnNames = new ArrayList<>();
+    }
 
     public DataReport(String title, String description, List<String> columnNames, String nameFile) {
         this.title = title;
@@ -27,6 +30,8 @@ public class DataReport<R> {
 
     public List<String> getColumnNames() {return columnNames;}
     public void setColumnNames(List<String> columnNames) {this.columnNames = columnNames;}
+
+    public void addColumnName(String columnName) {this.columnNames.add(columnName);}
 
     public String getNameFile() {return nameFile;}
     public void setNameFile(String nameFile) {this.nameFile = nameFile;}

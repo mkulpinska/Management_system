@@ -2,7 +2,7 @@ package com.company.managementSystem.presentation;
 
 import com.company.managementSystem.model.DataReport;
 
-public abstract class ConsolePrinter implements Printer {
+public class ConsolePrinter implements Printer {
 
     public void printReport(DataReport dataReport) {
         System.out.println("====================================");
