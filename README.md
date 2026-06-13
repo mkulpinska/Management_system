@@ -8,12 +8,12 @@ Program wczytuje dane z katalogu zawierającego pliki w formacie .xlsx, a nastę
 
 Program można uruchomić z poziomu konsoli za pomocą komendy:
 
-java -jar Analyzer.jar C:UsersUserNameDesktopRaporty -r1 -r2
+java -jar Analyzer.jar C:\Users\UserName\Desktop\Raporty -r1 -r2
 
 W powyższym przykładzie program:
 
 uruchamia plik Management_System.jar,
-wczytuje dane z katalogu C:UsersUserNameDesktopRaporty,
+wczytuje dane z katalogu C:\Users\UserName\Desktop\Raporty,
 generuje raporty r1 oraz r2.
 
 ## Argumenty
