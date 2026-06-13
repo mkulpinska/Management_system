@@ -6,10 +6,8 @@ import java.io.IOException;
 
 public class ReadData {
 
-    public class ReadFile {
-
         public static void main(String[] args) {
-            String filePath = "dane.txt";
+            String filePath = "C:/Szkolenia/studia/pracownia/reporter-dane/2012/01/Kowalski_Jan.xls";
 
             try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
                 String linia;
@@ -20,7 +18,6 @@ public class ReadData {
                 System.out.println("Wystąpił błąd podczas odczytu pliku: " + e.getMessage());
             }
         }
-    }
 }
 
 
