@@ -1,5 +1,7 @@
 package com.company.managementSystem.model;
 
+import org.apache.poi.ss.formula.functions.T;
+
 import java.util.List;
 
 public class DataReport {
@@ -7,6 +9,7 @@ public class DataReport {
     private String description;
     private List<String> nameColumns;
     private String nameFile;
+    private List<T> rows;
 
     public DataReport(){}
 
@@ -28,4 +31,7 @@ public class DataReport {
 
     public String getNameFile() {return nameFile;}
     public void setNameFile(String nameFile) {this.nameFile = nameFile;}
+
+    public List<T> getRows() { return rows; }
+    public void setRows(List<T> rows) { this.rows = rows; }
 }

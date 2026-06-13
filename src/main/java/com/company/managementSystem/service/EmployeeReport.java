@@ -1,18 +1,28 @@
 package com.company.managementSystem.service;
 
+import com.company.managementSystem.dto.EmployeeSummaryRecord;
 import com.company.managementSystem.model.DataReport;
+import com.company.managementSystem.persistence.DatabaseConnector;
 
 import java.util.List;
 
 public class EmployeeReport implements Report {
+    static DatabaseConnector connector;
+
     @Override
     public DataReport generateReport() {
-        return  new DataReport(
-                "Raport 1 - Czas pracy pracowników przy projektach",
-                "Raport przedstawia liczbę godzin przepracowanych przez pracowników przy konkretnych projektach.",
-                List.of("Imię i nazwisko", "Godziny", "Projekt"),
-                "employee_report.xlsx"
-        );
+        DataReport dataReport = new DataReport();
+
+        connector = DatabaseConnector.getInstance();
+        var session = connector.getSession();
+
+        List<EmployeeSummaryRecord> es = session.createQuery(
+                "select new com.company.managementSystem.dto.EmployeeSummaryRecord(wr.userName, sum(wr.timeInHours)) " +
+                        "from WorkRecord wr group by wr.userName",
+                EmployeeSummaryRecord.class
+        ).list();
+
+        return  dataReport;
     }
 
 }

@@ -8,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "recordDto")
-public class RecordDto {
+@Table(name = "workRecord")
+public class WorkRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,7 +31,7 @@ public class RecordDto {
     private String projectName;
 
 
-    public RecordDto(LocalDate date, String task, int timeInHours, String fileName, String projectName) {
+    public WorkRecord(LocalDate date, String task, int timeInHours, String fileName, String projectName) {
         this.date = date;
         this.task = task;
         this.timeInHours = timeInHours;

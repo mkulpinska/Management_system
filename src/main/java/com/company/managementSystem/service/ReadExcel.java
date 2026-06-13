@@ -1,7 +1,7 @@
 package com.company.managementSystem.service;
 
-import com.company.managementSystem.model.RecordDto;
-import com.company.managementSystem.model.Records;
+import com.company.managementSystem.model.WorkRecord;
+import com.company.managementSystem.model.WorkRecords;
 import com.company.managementSystem.persistence.DatabaseConnector;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.DataFormatter;
@@ -25,7 +25,7 @@ public class ReadExcel {
 
     public void run() throws IOException {
 
-        Records records = new Records();
+        WorkRecords records = new WorkRecords();
 
         try (FileInputStream file = new FileInputStream(
                 "reports/2025/09/Kamiński_Michał.xls");
@@ -48,19 +48,20 @@ public class ReadExcel {
                 LocalDate date = LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
                 int timeInHours = Integer.parseInt(hoursStr);
 
-                RecordDto record = new RecordDto(date, task, timeInHours, null, null);
+                WorkRecord record = new WorkRecord(date, task, timeInHours, null, null);
                 records.addRecord(record);
             }
         }
-        System.out.println("Wczytano rekordów: " + records.getRecordList().size());
+        System.out.println("Wczytano rekordów: " + records.getWorkRecords().size());
 
+        connector = DatabaseConnector.getInstance();
+        var session = connector.getSession();
+        Transaction transaction = session.beginTransaction();
 
-
-        for (RecordDto recordDto : records.getRecordList()) {
-            connector = DatabaseConnector.getInstance();
-            Transaction transaction = connector.getSession().beginTransaction();
-            connector.getSession().save(recordDto);
-            transaction.commit();
+        for (WorkRecord recordDto : records.getWorkRecords()) {
+            session.save(recordDto);
         }
+
+        transaction.commit();
     }
 }
