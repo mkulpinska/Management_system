@@ -19,7 +19,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class ReadExcel {
-    static DatabaseConnector connector;
     private final Session session;
     public ReadExcel(Session session) {
         this.session = session;
@@ -60,20 +59,17 @@ public class ReadExcel {
                 LocalDate date = LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
                 int timeInHours = Integer.parseInt(hoursStr);
 
-                WorkRecord record = new WorkRecord(date, task, timeInHours, userName, sheet.getSheetName(), filePath);
-                records.addRecord(record);
+                WorkRecord workRecord = new WorkRecord(date, task, timeInHours, userName, sheet.getSheetName(), filePath);
+                records.addRecord(workRecord);
             }
         }
         System.out.println("Wczytano rekordów: " + records.getWorkRecords().size());
 
-        connector = DatabaseConnector.getInstance();
-        var session = connector.getSession();
         Transaction transaction = session.beginTransaction();
-
-        for (WorkRecord recordDto : records.getWorkRecords()) {
-            session.save(recordDto);
+        for (WorkRecord workRecord : records.getWorkRecords()) {
+            session.save(workRecord);
         }
-
+        session.flush();
         transaction.commit();
     }
 }
