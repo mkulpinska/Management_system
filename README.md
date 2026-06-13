@@ -12,19 +12,19 @@ java -jar Analyzer.jar C:\Users\UserName\Desktop\Raporty -r1 -r2
 
 W powyższym przykładzie program:
 
-uruchamia plik Management_System.jar,
+uruchamia plik Management_system.jar,
 wczytuje dane z katalogu C:\Users\UserName\Desktop\Raporty,
 generuje raporty r1 oraz r2.
 
 ## Argumenty
 
-rogram obsługuje następujące argumenty:
+Program obsługuje następujące argumenty:
 
 Argument	Opis
 -r1	Generuje raport czasu pracy pracowników przy projektach.
 -r2	Generuje raport podsumowania godzin dla projektów.
 
-## Raporty: 
+## Raporty
 
 Raport 1 - Czas pracy pracowników przy projektach projektach
 Raport przedstawia liczbę godzin pzepracowanych przez pracowników przy konkretnych projektach:
