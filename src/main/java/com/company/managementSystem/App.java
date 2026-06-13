@@ -18,7 +18,7 @@ public class App {
         Session session = DatabaseConnector.getInstance().getSession();
 
         new ReadExcel(session).run();
-        DataReport dataReport = new EmployeeReport().generateReport();
+        DataReport dataReport = new EmployeeReport(session).generateReport();
 
         DatabaseConnector.getInstance().teardown();
     }
