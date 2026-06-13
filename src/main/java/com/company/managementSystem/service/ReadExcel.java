@@ -8,8 +8,10 @@ import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -18,6 +20,10 @@ import java.util.Date;
 
 public class ReadExcel {
     static DatabaseConnector connector;
+    private final Session session;
+    public ReadExcel(Session session) {
+        this.session = session;
+    }
 
     public static LocalDate convertToLocalDateViaSqlDate(Date dateToConvert) {
         return new java.sql.Date(dateToConvert.getTime()).toLocalDate();
@@ -26,9 +32,15 @@ public class ReadExcel {
     public void run() throws IOException {
 
         WorkRecords records = new WorkRecords();
+        File excelFile = new File("reports/2025/09/Kamiński_Michał.xls");
 
-        try (FileInputStream file = new FileInputStream(
-                "reports/2025/09/Kamiński_Michał.xls");
+        String userName = excelFile.getName().replace(".xls", "").replace("_", " ");;
+        String filePath = excelFile.getPath();
+
+
+
+        try (FileInputStream file = new FileInputStream(excelFile);
+
              Workbook workbook = new HSSFWorkbook(file)) {
 
             Sheet sheet = workbook.getSheetAt(0);
@@ -48,7 +60,7 @@ public class ReadExcel {
                 LocalDate date = LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
                 int timeInHours = Integer.parseInt(hoursStr);
 
-                WorkRecord record = new WorkRecord(date, task, timeInHours, null, null);
+                WorkRecord record = new WorkRecord(date, task, timeInHours, userName, sheet.getSheetName(), filePath);
                 records.addRecord(record);
             }
         }

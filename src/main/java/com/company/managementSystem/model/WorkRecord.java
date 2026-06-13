@@ -30,13 +30,17 @@ public class WorkRecord {
     @Column
     private String projectName;
 
+    @Column
+    private String filePath;
 
-    public WorkRecord(LocalDate date, String task, int timeInHours, String fileName, String projectName) {
+
+    public WorkRecord(LocalDate date, String task, int timeInHours, String userName, String projectName, String filePath) {
         this.date = date;
         this.task = task;
         this.timeInHours = timeInHours;
-        this.userName = fileName;
+        this.userName = userName;
         this.projectName = projectName;
+        this.filePath = filePath;
     }
 
     public LocalDate getDate() {
@@ -78,4 +82,8 @@ public class WorkRecord {
     public void setProjectName(String projectName) {
         this.projectName = projectName;
     }
+
+    public String getFilePath() {return filePath;}
+
+    public void setFilePath(String filePath) {this.filePath = filePath;}
 }
