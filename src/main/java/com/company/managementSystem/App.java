@@ -1,10 +1,13 @@
 package com.company.managementSystem;
 
-import com.company.managementSystem.dto.EmployeeSummaryRecord;
 import com.company.managementSystem.model.DataReport;
+import com.company.managementSystem.presentation.ConsolePrinter;
+import com.company.managementSystem.presentation.Printer;
 import com.company.managementSystem.service.EmployeeReport;
+import com.company.managementSystem.service.ProjectReport;
 import com.company.managementSystem.service.ReadExcel;
 import com.company.managementSystem.persistence.DatabaseConnector;
+import com.company.managementSystem.service.TaskReport;
 import org.hibernate.Session;
 
 
@@ -15,10 +18,49 @@ public class App {
     static DatabaseConnector connector;
 
     public static void main(String[] args) throws IOException {
+
+        boolean runReadExcel = false;
+        boolean runEmployeeReport = true;
+        boolean runProjectReport = false;
+        boolean runTaskReport = false;
+        Printer printer = new ConsolePrinter();;
+
+
+        //String filePath = args[0];
+
+        for(String arg : args){
+            if(arg.equals("-g")){runReadExcel = true;}
+            if(arg.equals("-rEmp")){runEmployeeReport = true;}
+            if(arg.equals("-rProj")){runProjectReport = true;}
+            if(arg.equals("-rTask")){runTaskReport = true;}
+            if(arg.startsWith("-rTyp=")){
+                switch(arg.substring(6)){
+                    case "PDF": printer = new ConsolePrinter(); break;
+                    case "XML": printer = new ConsolePrinter(); break;
+                    case "CSV": printer = new ConsolePrinter(); break;
+                    case "Con": printer = new ConsolePrinter(); break;
+                }
+            }
+        }
+
         Session session = DatabaseConnector.getInstance().getSession();
 
-        new ReadExcel(session).run();
-        DataReport dataReport = new EmployeeReport(session).generateReport();
+        if(runReadExcel){
+            new ReadExcel(session).run();
+        }
+
+        if(runEmployeeReport){
+            printer.printReport(new EmployeeReport(session).generateReport());
+        }
+
+        if(runProjectReport){
+            printer.printReport(new ProjectReport(session).generateReport());
+        }
+
+        if(runTaskReport){
+            printer.printReport(new TaskReport(session).generateReport());
+        }
+
 
         DatabaseConnector.getInstance().teardown();
     }

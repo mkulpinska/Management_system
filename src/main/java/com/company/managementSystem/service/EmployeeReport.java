@@ -2,7 +2,6 @@ package com.company.managementSystem.service;
 
 import com.company.managementSystem.dto.EmployeeSummaryRecord;
 import com.company.managementSystem.model.DataReport;
-import com.company.managementSystem.persistence.DatabaseConnector;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -23,6 +22,11 @@ public class EmployeeReport implements Report {
                 EmployeeSummaryRecord.class
         ).list();
 
+        dataReport.setRows(es);
+        dataReport.setDescription("Employee Report Description");
+        dataReport.setTitle("Employee Report Title");
+        dataReport.addColumnName("userName");
+        dataReport.addColumnName("timeInHours");
         return  dataReport;
     }
 
