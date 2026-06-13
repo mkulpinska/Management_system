@@ -20,13 +20,14 @@ generuje raporty r1 oraz r2.
 
 Program obsługuje następujące argumenty:
 
-Argument	Opis
--r1	Generuje raport czasu pracy pracowników przy projektach.
--r2	Generuje raport podsumowania godzin dla projektów.
+| Argument | Opis |
+|----------| --- |
+| r1       | Generuje raport czasu pracy pracowników przy projektach |
+| r2       | Generuje raport podsumowania godzin dla projektów    |
 
 ## Raporty
 
-Raport 1 - Czas pracy pracowników przy projektach projektach
+Raport 1 - Czas pracy pracowników przy projektach
 Raport przedstawia liczbę godzin pzepracowanych przez pracowników przy konkretnych projektach:
 
 
@@ -35,7 +36,7 @@ Raport przedstawia liczbę godzin pzepracowanych przez pracowników przy konkret
 | Jan Kowalski   | 20      | xcd      |
 | Anna Gałka    | 130     | abc      |
 
-Raport 2 - Podsumowanie godzi dla projektów
+Raport 2 - Podsumowanie godzin dla projektów
 Raport przedstawia łączną liczbę godzin przypisaną do każdego projektu w określonym zakresie dat.
 
 
