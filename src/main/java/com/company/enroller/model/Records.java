@@ -1,24 +1,28 @@
 package com.company.enroller.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Records {
 
-    private List<Record> recordList;
+    private List<RecordDto> recordList;
 
-    public void addRecord(Record record) {
+    public Records() {
+        this.recordList = new ArrayList<>();
+    }
+
+    public void addRecord(RecordDto record) {
         recordList.add(record);
     }
 
-    public Records(List<Record> records) {
-        this.recordList = records;
-    }
+    public List<RecordDto> getRecords() {return recordList;}
 
-    public List<Record> getRecordList() {
+
+    public List<RecordDto> getRecordList() {
         return recordList;
     }
 
-    public void setRecordList(List<Record> recordList) {
+    public void setRecordList(List<RecordDto> recordList) {
         this.recordList = recordList;
     }
 }
