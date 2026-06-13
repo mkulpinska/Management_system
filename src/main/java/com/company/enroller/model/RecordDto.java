@@ -1,17 +1,33 @@
 package com.company.enroller.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "recordDto")
 public class RecordDto {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @Column
     private LocalDate date;
 
+    @Column
     private String task;
 
+    @Column
     private int timeInHours;
 
+    @Column
     private String userName;
 
+    @Column
     private String projectName;
 
 
