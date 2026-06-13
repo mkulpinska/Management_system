@@ -1,22 +1,21 @@
 package com.company.managementSystem.model;
 
-import org.apache.poi.ss.formula.functions.T;
 
 import java.util.List;
 
-public class DataReport {
+public class DataReport<R> {
     private String title;
     private String description;
-    private List<String> nameColumns;
+    private List<String> columnNames;
     private String nameFile;
-    private List<T> rows;
+    private List<R> rows;
 
     public DataReport(){}
 
-    public DataReport(String title, String description, List<String> nameColumns, String nameFile) {
+    public DataReport(String title, String description, List<String> columnNames, String nameFile) {
         this.title = title;
         this.description = description;
-        this.nameColumns = nameColumns;
+        this.columnNames = columnNames;
         this.nameFile = nameFile;
     }
 
@@ -26,12 +25,12 @@ public class DataReport {
     public String getDescription() {return description;}
     public void setDescription(String description) {this.description = description;}
 
-    public List<String> getNameColumns() {return nameColumns;}
-    public void setNameColumns(List<String> nameColumns) {this.nameColumns = nameColumns;}
+    public List<String> getColumnNames() {return columnNames;}
+    public void setColumnNames(List<String> columnNames) {this.columnNames = columnNames;}
 
     public String getNameFile() {return nameFile;}
     public void setNameFile(String nameFile) {this.nameFile = nameFile;}
 
-    public List<T> getRows() { return rows; }
-    public void setRows(List<T> rows) { this.rows = rows; }
+    public List<R> getRows() { return rows; }
+    public void setRows(List<R> rows) { this.rows = rows; }
 }

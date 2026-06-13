@@ -14,8 +14,8 @@ public class EmployeeReport implements Report {
     }
 
     @Override
-    public DataReport generateReport() {
-        DataReport dataReport = new DataReport();
+    public DataReport<EmployeeSummaryRecord> generateReport() {
+        DataReport<EmployeeSummaryRecord> dataReport = new DataReport<>();
 
         List<EmployeeSummaryRecord> es = session.createQuery(
                 "select new com.company.managementSystem.dto.EmployeeSummaryRecord(wr.userName, sum(wr.timeInHours)) " +

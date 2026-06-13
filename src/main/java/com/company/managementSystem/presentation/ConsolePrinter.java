@@ -14,7 +14,7 @@ public abstract class ConsolePrinter implements Printer {
 
         System.out.println("Kolumny:");
 
-        for (String columnName : dataReport.getNameColumns()) {
+        for (Object columnName : dataReport.getColumnNames()) {
             System.out.printf("%-25s", columnName);
         }
 
