@@ -1,0 +1,15 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+.settings/
+.classpath
+.project
+.class
+.logo
+/target/
+.DS_Store
+.idea/
+*.iml
+src/main/resources/public/
+*.db
+node_modules/
