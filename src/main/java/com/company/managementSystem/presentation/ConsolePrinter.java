@@ -1,6 +1,6 @@
-package com.company.enroller.presentation;
+package com.company.managementSystem.presentation;
 
-import com.company.enroller.model.DataReport;
+import com.company.managementSystem.model.DataReport;
 
 public abstract class ConsolePrinter implements Printer {
 

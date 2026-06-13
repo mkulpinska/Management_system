@@ -1,4 +1,4 @@
-package com.company.enroller.model;
+package com.company.managementSystem.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;

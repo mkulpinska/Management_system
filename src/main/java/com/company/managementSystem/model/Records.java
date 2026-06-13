@@ -1,4 +1,4 @@
-package com.company.enroller.model;
+package com.company.managementSystem.model;
 
 import java.util.ArrayList;
 import java.util.List;

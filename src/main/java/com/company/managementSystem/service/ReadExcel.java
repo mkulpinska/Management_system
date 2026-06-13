@@ -1,7 +1,10 @@
-package com.company.enroller.model;
+package com.company.managementSystem.service;
 
-import com.company.enroller.persistence.DatabaseConnector;
+import com.company.managementSystem.model.RecordDto;
+import com.company.managementSystem.model.Records;
+import com.company.managementSystem.persistence.DatabaseConnector;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -10,6 +13,7 @@ import org.hibernate.Transaction;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class ReadExcel {
@@ -24,7 +28,7 @@ public class ReadExcel {
         Records records = new Records();
 
         try (FileInputStream file = new FileInputStream(
-                "C:/Szkolenia/studia/pracownia/reporter-dane/2012/01/Kowalski_Jan.xls");
+                "reports/2025/09/Kamiński_Michał.xls");
              Workbook workbook = new HSSFWorkbook(file)) {
 
             Sheet sheet = workbook.getSheetAt(0);
@@ -35,18 +39,17 @@ public class ReadExcel {
                     // pominięcie nagłówka
                     continue;
                 }
-                Date date = row.getCell(0).getDateCellValue();
-                String task = row.getCell(1).getStringCellValue();
-                int timeInHours = (int) row.getCell(2).getNumericCellValue();
 
-                RecordDto record = new RecordDto(
-                        convertToLocalDateViaSqlDate(date), task, timeInHours, null, null);
+                DataFormatter formatter = new DataFormatter();
+                String dateStr = formatter.formatCellValue(row.getCell(0));
+                String task = formatter.formatCellValue(row.getCell(1));
+                String hoursStr = formatter.formatCellValue(row.getCell(2));
+
+                LocalDate date = LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+                int timeInHours = Integer.parseInt(hoursStr);
+
+                RecordDto record = new RecordDto(date, task, timeInHours, null, null);
                 records.addRecord(record);
-
-
-
-
-
             }
         }
         System.out.println("Wczytano rekordów: " + records.getRecordList().size());

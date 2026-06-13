@@ -1,4 +1,4 @@
-package com.company.enroller.persistence;
+package com.company.managementSystem.persistence;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
