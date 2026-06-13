@@ -24,7 +24,7 @@ Argument	Opis
 -r1	Generuje raport czasu pracy pracowników przy projektach.
 -r2	Generuje raport podsumowania godzin dla projektów.
 
-## Raporty: 
+## Raporty
 
 Raport 1 - Czas pracy pracowników przy projektach projektach
 Raport przedstawia liczbę godzin pzepracowanych przez pracowników przy konkretnych projektach:
