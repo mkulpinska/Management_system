@@ -1,20 +1,47 @@
-# Enroller Fullstack
+# Management_system
 
-Witaj programisto! Dzięki temu projektowi zostaniesz *full-stack developerem*.
+Program konsolowy napisany w języku Java, służący do analizowania danych z plików Excel oraz generowania raportów dotyczących pracowników, projektów i czasu pracy.
 
-## Przygotowanie
+Program wczytuje dane z katalogu zawierającego pliki w formacie .xlsx, a następnie generuje wybrane raporty na podstawie argumentów podanych w konsoli.
 
-Zaimportuj projekt do ulubionego IDE (np. IntelliJ, Eclipse, VS Code).
+## Sposób użycia
 
-## Backend
+Program można uruchomić z poziomu konsoli za pomocą komendy:
 
-Uruchom aplikację Springową - klasa `App`.
+java -jar Analyzer.jar C:UsersUserNameDesktopRaporty -r1 -r2
 
-## Frontend
+W powyższym przykładzie program:
 
-Źródła aplikacji frontendowej są w `src/main/frontend`. Wykonaj tam
+uruchamia plik Management_System.jar,
+wczytuje dane z katalogu C:UsersUserNameDesktopRaporty,
+generuje raporty r1 oraz r2.
 
-```
-npm install
-npm start
+## Argumenty
+
+rogram obsługuje następujące argumenty:
+
+Argument	Opis
+-r1	Generuje raport czasu pracy pracowników przy projektach.
+-r2	Generuje raport podsumowania godzin dla projektów.
+
+## Raporty: 
+
+Raport 1 - Czas pracy pracowników przy projektach projektach
+Raport przedstawia liczbę godzin pzepracowanych przez pracowników przy konkretnych projektach:
+
+
+| Imię Nazwisko | godziny | projekty |
+| -------------- | ------- | -------- |
+| Jan Kowalski   | 20      | xcd      |
+| Anna Gałka    | 130     | abc      |
+
+Raport 2 - Podsumowanie godzi dla projektów
+Raport przedstawia łączną liczbę godzin przypisaną do każdego projektu w określonym zakresie dat.
+
+
+| Nazwa Projektu | ile godzin | zakres dat              |
+| -------------- | ---------- | ----------------------- |
+| xcd            | 130        | 01.01.2020 - 01.01.2021 |
+| abc            | 200        | 01.12.2021 - 01.01.2025 |
+
 ```
