@@ -9,6 +9,6 @@ WORKDIR /usr/app
 RUN mvn package
 
 FROM amazoncorretto:17
-COPY --from=build /usr/app/target/enroller-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build /usr/app/target/managementSystem-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","app.jar"]

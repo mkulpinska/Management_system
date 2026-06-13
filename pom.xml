@@ -9,10 +9,10 @@
     </parent>
 
     <groupId>com.company</groupId>
-    <artifactId>enroller</artifactId>
+    <artifactId>managementSystem</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>enroller</name>
+    <name>managementSystem</name>
     <properties>
         <java.version>17</java.version>
     </properties>

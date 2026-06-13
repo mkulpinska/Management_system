@@ -54,13 +54,15 @@ public class ReadExcel {
         }
         System.out.println("Wczytano rekordów: " + records.getRecordList().size());
 
-
+        connector = DatabaseConnector.getInstance();
+        var session = connector.getSession();
+        Transaction transaction = session.beginTransaction();
 
         for (RecordDto recordDto : records.getRecordList()) {
-            connector = DatabaseConnector.getInstance();
-            Transaction transaction = connector.getSession().beginTransaction();
-            connector.getSession().save(recordDto);
-            transaction.commit();
+            session.save(recordDto);
         }
+
+        transaction.commit();
+        session.close();
     }
 }
