@@ -52,17 +52,16 @@ public class ReadExcel {
                 records.addRecord(record);
             }
         }
-        System.out.println("Wczytano rekordów: " + records.getWorkRecordList().size());
+        System.out.println("Wczytano rekordów: " + records.getWorkRecords().size());
 
         connector = DatabaseConnector.getInstance();
         var session = connector.getSession();
         Transaction transaction = session.beginTransaction();
 
-        for (WorkRecord recordDto : records.getWorkRecordList()) {
+        for (WorkRecord recordDto : records.getWorkRecords()) {
             session.save(recordDto);
         }
 
         transaction.commit();
-        session.close();
     }
 }
