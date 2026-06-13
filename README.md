@@ -8,7 +8,7 @@ Program wczytuje dane z katalogu zawierającego pliki w formacie .xlsx, a nastę
 
 Program można uruchomić z poziomu konsoli za pomocą komendy:
 
-java -jar Analyzer.jar C:\Users\UserName\Desktop\Raporty -r1 -r2
+java -jar Management_system.jar C:\Users\UserName\Desktop\Raporty -r1 -r2
 
 W powyższym przykładzie program:
 
@@ -26,7 +26,7 @@ Argument	Opis
 
 ## Raporty
 
-Raport 1 - Czas pracy pracowników przy projektach projektach
+Raport 1 - Czas pracy pracowników przy projektach
 Raport przedstawia liczbę godzin pzepracowanych przez pracowników przy konkretnych projektach:
 
 
@@ -43,5 +43,7 @@ Raport przedstawia łączną liczbę godzin przypisaną do każdego projektu w o
 | -------------- | ---------- | ----------------------- |
 | xcd            | 130        | 01.01.2020 - 01.01.2021 |
 | abc            | 200        | 01.12.2021 - 01.01.2025 |
+
+```
 
 ```
