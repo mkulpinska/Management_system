@@ -1,8 +1,7 @@
-import com.company.enroller.model.DataReport;
-import com.company.enroller.model.RecordDto;
-import com.company.enroller.model.Records;
-import com.company.enroller.service.EmployeeReport;
-import com.company.enroller.service.Report;
+import com.company.managementSystem.model.RecordDto;
+import com.company.managementSystem.model.Records;
+import com.company.managementSystem.service.EmployeeReport;
+import com.company.managementSystem.service.Report;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -19,7 +18,7 @@ public class RaportTest {
         records.addRecord(recordDto);
 
         Report employeeReport = new EmployeeReport();
-        employeeReport.generateReport(records);
-        assertEquals("Raport 1 - Czas pracy pracowników przy projektach", employeeReport.getReport().getTitle(), "Nieprawidłowy tytul");
+        employeeReport.generateReport();
+        assertEquals("Raport 1 - Czas pracy pracowników przy projektach", employeeReport.generateReport().getTitle(), "Nieprawidłowy tytul");
     }
 }

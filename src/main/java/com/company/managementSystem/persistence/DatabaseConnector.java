@@ -1,4 +1,4 @@
-package com.company.enroller.persistence;
+package com.company.managementSystem.persistence;
 
 import org.hibernate.Session;
 
