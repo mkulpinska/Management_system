@@ -20,6 +20,6 @@ public class RaportTest {
 
         Report employeeReport = new EmployeeReport();
         employeeReport.generateReport(records);
-        assertEquals("tytul", employeeReport.getReport().getTitle(), "Nie prawidłowy tytul");
+        assertEquals("Raport 1 - Czas pracy pracowników przy projektach", employeeReport.getReport().getTitle(), "Nieprawidłowy tytul");
     }
 }
