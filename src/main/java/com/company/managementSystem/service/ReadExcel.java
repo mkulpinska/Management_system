@@ -10,10 +10,14 @@ import org.hibernate.Transaction;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.stream.Stream;
 
 public class ReadExcel {
 
@@ -23,11 +27,29 @@ public class ReadExcel {
         this.session = session;
     }
 
-    public void run(String path) throws IOException {
+    public void run(String rootPath) throws IOException {
+
+        // przejsćie po drzewie katalogów
+        try (Stream<Path> paths = Files.walk(Paths.get(rootPath))) {
+
+            paths.filter(Files::isRegularFile)
+                    .filter(path -> path.toString().endsWith(".xls"))
+                    .forEach(path -> {
+                        try {
+                            processExcelFile(String.valueOf(path.toFile()));
+                        } catch (Exception e) {
+                            System.err.println("Błąd podczas przetwarzania pliku: " + path);
+                            e.printStackTrace();
+                        }
+                    });
+        }
+    }
+
+    public void processExcelFile(String path) throws IOException {
 
         WorkRecords records = new WorkRecords();
 
-        File excelFile = new File(path +"Markowska_Aleksandra.xls");
+        File excelFile = new File(path);
 
 
         if (!excelFile.exists()) {
