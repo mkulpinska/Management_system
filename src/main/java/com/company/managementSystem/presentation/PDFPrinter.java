@@ -8,17 +8,24 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.springframework.security.util.FieldUtils.getFieldValue;
 
 public class PDFPrinter implements Printer {
     public void printReport(DataReport dataReport) throws DocumentException, IllegalAccessException {
-        String fileName = "report.pdf";
+
         File outputDir = new File("exports");
         if (!outputDir.exists()) {
             outputDir.mkdirs();
         }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
+        String timestamp = LocalDateTime.now().format(formatter);
+
+        String fileName = "report" + timestamp + ".pdf";
         File outputFile = new File(outputDir, fileName);
 
         Document document = new Document();
