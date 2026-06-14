@@ -14,9 +14,9 @@ W powyższym przykładzie program:
 
 Wczytuje dane z plików Excel,
 uzywa katalogu Reports/2025/07/
-generuje raportpracowników w fomacie CSV
+generuje raport pracowników w fomacie CSV
 
-Argumenty
+## Argumenty
 
 Program obsługuje następujące argumenty:
 
