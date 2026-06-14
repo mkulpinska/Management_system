@@ -1,5 +1,6 @@
 package com.company.managementSystem.presentation;
 
+import com.company.managementSystem.dto.ReportRow;
 import com.company.managementSystem.model.DataReport;
 
 import java.io.File;
@@ -61,23 +62,23 @@ public class PrintCSV implements Printer {
             return;
         }
 
-        for (Object row : dataReport.getRows()) {
-            for (int i = 0; i < columns.size(); i++) {
-                String column = columns.get(i);
+        for(ReportRow rowRecord: dataReport.getRows()) {
 
-                Object value = getFieldValue(row, column);
+            String[] values = rowRecord.toStringArray();
 
-                if (value != null) {
-                    writer.write(value.toString());
-                }
+            int i =0;
+            for (String value: values) {
+                writer.write(value);
 
-                if (i < columns.size() - 1) {
+                if (i < values.length - 1) {
                     writer.write(";");
                 }
-            }
 
+
+            }
             writer.write(System.lineSeparator());
         }
+
     }
 
     private Object getFieldValue(Object row, String column) {
@@ -97,3 +98,5 @@ public class PrintCSV implements Printer {
         }
     }
 }
+
+
