@@ -24,7 +24,7 @@ public class App {
         boolean runTaskReport = false;
         Printer printer = new PDFPrinter();
 
-        String path = "Reports";
+        String path = "ReportError";
 
         for (String arg : args) {
             if (arg.equals("-g")) {
