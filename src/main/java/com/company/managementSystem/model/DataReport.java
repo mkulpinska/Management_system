@@ -1,15 +1,17 @@
 package com.company.managementSystem.model;
 
 
+import com.company.managementSystem.dto.ReportRow;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataReport<R> {
+public class DataReport {
     private String title;
     private String description;
     private List<String> columnNames;
     private String nameFile;
-    private List<R> rows;
+    private List<? extends ReportRow> rows;
 
     public DataReport(){
         columnNames = new ArrayList<>();
@@ -36,6 +38,6 @@ public class DataReport<R> {
     public String getNameFile() {return nameFile;}
     public void setNameFile(String nameFile) {this.nameFile = nameFile;}
 
-    public List<R> getRows() { return rows; }
-    public void setRows(List<R> rows) { this.rows = rows; }
+    public List<? extends ReportRow> getRows() { return rows; }
+    public void setRows(List<? extends ReportRow> rows) { this.rows = rows; }
 }

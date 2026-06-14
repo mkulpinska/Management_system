@@ -1,6 +1,9 @@
 package com.company.managementSystem.presentation;
 
+import com.company.managementSystem.dto.ReportRow;
 import com.company.managementSystem.model.DataReport;
+import org.apache.poi.hssf.record.RowRecord;
+import org.apache.poi.ss.usermodel.Row;
 
 public class ConsolePrinter implements Printer {
 
@@ -16,6 +19,24 @@ public class ConsolePrinter implements Printer {
 
         for (Object columnName : dataReport.getColumnNames()) {
             System.out.printf("%-25s", columnName);
+        }
+
+        String columns ="";
+        for(String column: dataReport.getColumnNames()){
+           columns = columns + " " + column;
+        }
+
+
+
+        for(ReportRow rowRecord: dataReport.getRows()) {
+
+            String[] values = rowRecord.toStringArray();
+
+            for (String value: values) {
+                System.out.print(value + " ");
+
+            }
+            System.out.println();
         }
 
         System.out.println();
