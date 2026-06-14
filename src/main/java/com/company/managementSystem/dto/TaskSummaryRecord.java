@@ -1,4 +1,7 @@
 package com.company.managementSystem.dto;
 
-public class TaskSummaryRecord {
+public record TaskSummaryRecord(String task, Long timeInHours) {
+
 }
+
+

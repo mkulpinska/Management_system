@@ -25,6 +25,8 @@ public class App {
         Printer printer = new ConsolePrinter();
 
         //String filePath = args[0];
+        Printer printer = new ConsolePrinter();
+        String path = "reports/2025/09/";
 
         for (String arg : args) {
             if (arg.equals("-g")) {
@@ -55,10 +57,14 @@ public class App {
                         break;
                 }
             }
+            if(arg.startsWith("-p=")){
+                path = arg.substring(3);}
         }
 
         Session session = DatabaseConnector.getInstance().getSession();
 
+        if(runReadExcel){
+            new ReadExcel(session).run(path);
         if (runReadExcel) {
             new ReadExcel(session).run();
         }
