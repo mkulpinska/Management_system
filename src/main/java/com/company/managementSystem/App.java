@@ -21,10 +21,8 @@ public class App {
         boolean runEmployeeReport = true;
         boolean runProjectReport = false;
         boolean runTaskReport = false;
-        Printer printer = new ConsolePrinter();;
-
-
-        //String filePath = args[0];
+        Printer printer = new ConsolePrinter();
+        String path = "reports/2025/09/";
 
         for(String arg : args){
             if(arg.equals("-g")){runReadExcel = true;}
@@ -39,12 +37,14 @@ public class App {
                     case "Con": printer = new ConsolePrinter(); break;
                 }
             }
+            if(arg.startsWith("-p=")){
+                path = arg.substring(3);}
         }
 
         Session session = DatabaseConnector.getInstance().getSession();
 
         if(runReadExcel){
-            new ReadExcel(session).run();
+            new ReadExcel(session).run(path);
         }
 
         if(runReadPdf){
