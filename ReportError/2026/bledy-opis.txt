@@ -1,0 +1,10 @@
+Typy błędów:
+
+Dąbrowski Paweł (tekst zamiast liczby)
+Jankowska_Zofia (nieistniejąca data)
+Kaczmarczyk_Julia (puste pole obowiązkowe)
+Kamiński_Michał (ujemna liczba godzin)
+Kwiatkowska_Natalia (data w różnym formacie)
+Szymańska_Agnieszka (błąd logiczny większa liczba godzin)
+
+
