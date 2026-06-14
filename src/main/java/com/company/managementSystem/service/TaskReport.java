@@ -1,5 +1,6 @@
 package com.company.managementSystem.service;
 
+import com.company.managementSystem.dto.ReportRow;
 import com.company.managementSystem.dto.TaskSummaryRecord;
 import com.company.managementSystem.model.DataReport;
 import org.hibernate.Session;
@@ -14,8 +15,8 @@ public class TaskReport implements Report {
     }
 
     @Override
-    public DataReport<TaskSummaryRecord> generateReport() {
-        DataReport<TaskSummaryRecord> dataReport = new DataReport<>();
+    public DataReport generateReport() {
+        DataReport dataReport = new DataReport();
 
 
         List<TaskSummaryRecord> ts = session.createQuery(

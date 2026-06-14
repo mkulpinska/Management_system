@@ -13,7 +13,7 @@ import static org.springframework.security.util.FieldUtils.getFieldValue;
 public class PrintCSV implements Printer {
 
     @Override
-    public void printReport(DataReport<?> dataReport){
+    public void printReport(DataReport dataReport){
         String fileName = dataReport.getNameFile();
 
         if (fileName == null || fileName.isBlank()) {
@@ -56,7 +56,7 @@ public class PrintCSV implements Printer {
         writer.write(System.lineSeparator());
     }
 
-    private void writeRows(FileWriter writer, DataReport<?> dataReport, List<String> columns) throws IOException {
+    private void writeRows(FileWriter writer, DataReport dataReport, List<String> columns) throws IOException {
         if (dataReport.getRows() == null) {
             return;
         }

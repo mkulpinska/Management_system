@@ -1,6 +1,7 @@
 package com.company.managementSystem.service;
 
 import com.company.managementSystem.dto.EmployeeSummaryRecord;
+import com.company.managementSystem.dto.ReportRow;
 import com.company.managementSystem.model.DataReport;
 import org.hibernate.Session;
 
@@ -13,8 +14,8 @@ public class EmployeeReport implements Report {
     }
 
     @Override
-    public DataReport<EmployeeSummaryRecord> generateReport() {
-        DataReport<EmployeeSummaryRecord> dataReport = new DataReport<>();
+    public DataReport generateReport() {
+        DataReport dataReport = new DataReport();
 
         List<EmployeeSummaryRecord> es = session.createQuery(
                 "select new com.company.managementSystem.dto.EmployeeSummaryRecord(wr.userName, sum(wr.timeInHours)) " +

@@ -13,7 +13,7 @@ public class ProjectReport implements Report {
     }
 
     @Override
-    public DataReport<ProjectSummaryRecord> generateReport() {
+    public DataReport generateReport() {
         return  new DataReport(
                 "Raport 2 - Podsumowanie godzin dla projektów",
                 "Raport przedstawia łączną liczbę godzin przypisaną do każdego projektu w określonym zakresie dat.",
