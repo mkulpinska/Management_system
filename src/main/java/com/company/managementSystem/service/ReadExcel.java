@@ -49,7 +49,6 @@ public class ReadExcel {
                     // pominięcie nagłówka
                     continue;
                 }
-
                 DataFormatter formatter = new DataFormatter();
                 String dateStr = formatter.formatCellValue(row.getCell(0));
                 String task = formatter.formatCellValue(row.getCell(1));
