@@ -13,7 +13,7 @@ public class TaskReport implements Report {
     }
 
     @Override
-    public DataReport<TaskSummaryRecord> generateReport() {
+    public DataReport generateReport() {
         return new DataReport(
                 "Raport 4 - Zadania zajmujące najwięcej czasu",
                 "Raport przedstawia listę zadań posortowaną według liczby przepracowanych godzin.",

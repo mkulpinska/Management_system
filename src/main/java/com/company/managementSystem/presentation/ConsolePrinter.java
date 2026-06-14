@@ -1,11 +1,13 @@
 package com.company.managementSystem.presentation;
 
+import com.company.managementSystem.dto.ReportRow;
 import com.company.managementSystem.model.DataReport;
+import org.apache.poi.hssf.record.RowRecord;
 import org.apache.poi.ss.usermodel.Row;
 
 public class ConsolePrinter implements Printer {
 
-    public void printReport(DataReport<?> dataReport) {
+    public void printReport(DataReport dataReport) {
         System.out.println("====================================");
         System.out.println(dataReport.getTitle());
         System.out.println("====================================");
@@ -19,14 +21,22 @@ public class ConsolePrinter implements Printer {
             System.out.printf("%-25s", columnName);
         }
 
+        String columns ="";
         for(String column: dataReport.getColumnNames()){
-            for(Object row: dataReport.getRows()) {
-                try {
-                    String rowVal = row.getClass().getDeclaredField(column).toString();
-                } catch (NoSuchFieldException e) {
-                    throw new RuntimeException(e);
-                }
+           columns = columns + " " + column;
+        }
+
+
+
+        for(ReportRow rowRecord: dataReport.getRows()) {
+
+            String[] values = rowRecord.toStringArray();
+
+            for (String value: values) {
+                System.out.print(value + " ");
+
             }
+            System.out.println();
         }
 
         System.out.println();

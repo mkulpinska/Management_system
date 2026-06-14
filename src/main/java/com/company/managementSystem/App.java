@@ -16,7 +16,7 @@ public class App {
 
     public static void main(String[] args) throws IOException {
 
-        boolean runReadExcel = false;
+        boolean runReadExcel = true;
         boolean runReadPdf = false;
         boolean runEmployeeReport = true;
         boolean runProjectReport = false;
