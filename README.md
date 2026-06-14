@@ -27,23 +27,32 @@ Program obsługuje następujące argumenty:
 
 ## Raporty
 
-Raport 1 - Czas pracy pracowników przy projektach
+Raport 1 - Czas pracy pracowników przy projektach.
 Raport przedstawia liczbę godzin pzepracowanych przez pracowników przy konkretnych projektach:
 
+| Imię Nazwisko | ile godzin | procent czasu | * Nazwa projektu |
+|---------------|------------|---------------|------------------|
+| Jan Kowalski  | 20         | 20%           |                  |
+| Anna Gałka    | 50         | 40%           |                  |
 
-| Imię Nazwisko | godziny | projekty |
-| -------------- | ------- | -------- |
-| Jan Kowalski   | 20      | xcd      |
-| Anna Gałka    | 130     | abc      |
-
-Raport 2 - Podsumowanie godzin dla projektów
-Raport przedstawia łączną liczbę godzin przypisaną do każdego projektu w określonym zakresie dat.
+Raport 2 - Podsumowanie godzin dla projektów.
+Raport przedstawia łączną liczbę godzin przypisaną do każdego projektu w określonym zakresie dat:
 
 
-| Nazwa Projektu | ile godzin | zakres dat              |
-| -------------- | ---------- | ----------------------- |
-| xcd            | 130        | 01.01.2020 - 01.01.2021 |
-| abc            | 200        | 01.12.2021 - 01.01.2025 |
+| Nazwa Projektu | suma godzin | zakres dat              |
+|----------------|-------------| ----------------------- |
+| Projekt 1      | 130         | 01.01.2020 - 01.01.2021 |
+| Projekt 2      | 200         | 01.12.2021 - 01.01.2025 |
+
+
+Raport 4 - Podsumowanie godzin dla zadań (sortowanie od największej liczby godzin).
+Raport przedstawia łączną liczbę godzin spędzoną nad zadaniami danego typu:
+
+
+| Nazwa Zadania | ile godzin   | *tagi |
+|---------------|--------------|-------|
+| Zadanie 1     | 130          |       |
+| Zadanie 2     | 200          |       |
 
 ```
 

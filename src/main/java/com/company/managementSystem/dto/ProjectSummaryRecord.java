@@ -1,4 +1,10 @@
 package com.company.managementSystem.dto;
 
-public class ProjectSummaryRecord {
-}
+import java.time.LocalDate;
+
+public record ProjectSummaryRecord(
+        String projectName,
+        Long timeInHours,
+        LocalDate minDate,
+        LocalDate maxDate
+) {}
