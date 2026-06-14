@@ -3,11 +3,8 @@ package com.company.managementSystem;
 import com.company.managementSystem.model.DataReport;
 import com.company.managementSystem.presentation.ConsolePrinter;
 import com.company.managementSystem.presentation.Printer;
-import com.company.managementSystem.service.EmployeeReport;
-import com.company.managementSystem.service.ProjectReport;
-import com.company.managementSystem.service.ReadExcel;
+import com.company.managementSystem.service.*;
 import com.company.managementSystem.persistence.DatabaseConnector;
-import com.company.managementSystem.service.TaskReport;
 import org.hibernate.Session;
 
 
@@ -20,6 +17,7 @@ public class App {
     public static void main(String[] args) throws IOException {
 
         boolean runReadExcel = false;
+        boolean runReadPdf = false;
         boolean runEmployeeReport = true;
         boolean runProjectReport = false;
         boolean runTaskReport = false;
@@ -47,6 +45,10 @@ public class App {
 
         if(runReadExcel){
             new ReadExcel(session).run();
+        }
+
+        if(runReadPdf){
+            new ReadPdf(session).run();
         }
 
         if(runEmployeeReport){
