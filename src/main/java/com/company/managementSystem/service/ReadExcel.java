@@ -29,10 +29,10 @@ public class ReadExcel {
         return new java.sql.Date(dateToConvert.getTime()).toLocalDate();
     }
 
-    public void run() throws IOException {
+    public void run(String path) throws IOException {
 
         WorkRecords records = new WorkRecords();
-        File excelFile = new File("reports/2025/09/Kamiński_Michał.xls");
+        File excelFile = new File(path + "Kamiński_Michał.xls");
 
         if (!excelFile.exists()) {
             throw new IOException("Plik nie został znaleziony: " + excelFile.getAbsolutePath());
