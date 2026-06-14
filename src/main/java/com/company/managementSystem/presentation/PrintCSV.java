@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static org.springframework.security.util.FieldUtils.getFieldValue;
@@ -17,10 +19,12 @@ public class PrintCSV implements Printer {
     public void printReport(DataReport dataReport){
         String fileName = dataReport.getNameFile();
 
-        if (fileName == null || fileName.isBlank()) {
-            fileName = "report.csv";
-        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
+        String timestamp = LocalDateTime.now().format(formatter);
 
+        if (fileName == null || fileName.isBlank()) {
+            fileName = "report" + timestamp + ".csv";
+        }
 
         File outputDir = new File("exports");
 
