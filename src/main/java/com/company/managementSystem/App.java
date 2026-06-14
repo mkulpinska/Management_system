@@ -3,10 +3,7 @@ package com.company.managementSystem;
 import com.company.managementSystem.persistence.DatabaseConnector;
 import com.company.managementSystem.presentation.ConsolePrinter;
 import com.company.managementSystem.presentation.Printer;
-import com.company.managementSystem.service.EmployeeReport;
-import com.company.managementSystem.service.ProjectReport;
-import com.company.managementSystem.service.ReadExcel;
-import com.company.managementSystem.service.TaskReport;
+import com.company.managementSystem.service.*;
 import org.hibernate.Session;
 
 import java.io.IOException;
@@ -25,7 +22,7 @@ public class App {
         Printer printer = new ConsolePrinter();
 
         //String filePath = args[0];
-        Printer printer = new ConsolePrinter();
+
         String path = "reports/2025/09/";
 
         for (String arg : args) {
@@ -57,34 +54,36 @@ public class App {
                         break;
                 }
             }
-            if(arg.startsWith("-p=")){
-                path = arg.substring(3);}
+            if (arg.startsWith("-p=")) {
+                path = arg.substring(3);
+            }
         }
 
         Session session = DatabaseConnector.getInstance().getSession();
 
-        if(runReadExcel){
-            new ReadExcel(session).run(path);
         if (runReadExcel) {
             new ReadExcel(session).run();
+            if (runReadExcel) {
+                new ReadExcel(session).run();
+            }
+
+            if (runReadPdf) {
+                new ReadPdf(session).run();
+            }
+
+            if (runEmployeeReport) {
+                printer.printReport(new EmployeeReport(session).generateReport());
+            }
+
+            if (runProjectReport) {
+                printer.printReport(new ProjectReport(session).generateReport());
+            }
+
+            if (runTaskReport) {
+                printer.printReport(new TaskReport(session).generateReport());
+            }
+
+            DatabaseConnector.getInstance().teardown();
         }
-
-      /*  if(runReadPdf){
-            new ReadPdf(session).run();
-        }*/
-
-        if (runEmployeeReport) {
-            printer.printReport(new EmployeeReport(session).generateReport());
-        }
-
-        if (runProjectReport) {
-            printer.printReport(new ProjectReport(session).generateReport());
-        }
-
-        if (runTaskReport) {
-            printer.printReport(new TaskReport(session).generateReport());
-        }
-
-        DatabaseConnector.getInstance().teardown();
     }
 }

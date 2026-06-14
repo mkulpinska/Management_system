@@ -14,7 +14,6 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Date;
 
 public class ReadExcel {
 
@@ -29,6 +28,7 @@ public class ReadExcel {
         WorkRecords records = new WorkRecords();
 
         File excelFile = new File("reports/2025/07/Markowska_Aleksandra.xls");
+       // File excelFile = new File(path);
 
         if (!excelFile.exists()) {
             throw new IOException("Plik nie został znaleziony: " + excelFile.getAbsolutePath());
