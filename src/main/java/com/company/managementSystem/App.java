@@ -2,8 +2,11 @@ package com.company.managementSystem;
 
 import com.company.managementSystem.persistence.DatabaseConnector;
 import com.company.managementSystem.presentation.ConsolePrinter;
+import com.company.managementSystem.presentation.PDFPrinter;
+import com.company.managementSystem.presentation.PrintCSV;
 import com.company.managementSystem.presentation.Printer;
 import com.company.managementSystem.service.*;
+import com.itextpdf.text.DocumentException;
 import org.hibernate.Session;
 
 import java.io.IOException;
@@ -12,14 +15,14 @@ public class App {
 
     static DatabaseConnector connector;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, DocumentException, IllegalAccessException {
 
         boolean runReadExcel = true;
         boolean runReadPdf = false;
-        boolean runEmployeeReport = true;
+        boolean runEmployeeReport = false;
         boolean runProjectReport = false;
         boolean runTaskReport = false;
-        Printer printer = new ConsolePrinter();
+        Printer printer = new PDFPrinter();
 
         //String filePath = args[0];
 
@@ -41,13 +44,13 @@ public class App {
             if (arg.startsWith("-rTyp=")) {
                 switch (arg.substring(6)) {
                     case "PDF":
-                        printer = new ConsolePrinter();
+                        printer = new PDFPrinter();
                         break;
                     case "XML":
                         printer = new ConsolePrinter();
                         break;
                     case "CSV":
-                        printer = new ConsolePrinter();
+                        printer = new PrintCSV();
                         break;
                     case "Con":
                         printer = new ConsolePrinter();
