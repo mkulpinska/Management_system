@@ -23,18 +23,17 @@ public class ConsolePrinter implements Printer {
 
         String columns ="";
         for(String column: dataReport.getColumnNames()){
-           columns = columns + " " + column;
+            columns = columns + " " + column;
         }
 
-
+        System.out.println();
 
         for(ReportRow rowRecord: dataReport.getRows()) {
 
             String[] values = rowRecord.toStringArray();
 
             for (String value: values) {
-                System.out.print(value + " ");
-
+                System.out.printf("%-25s", value);
             }
             System.out.println();
         }
@@ -43,5 +42,5 @@ public class ConsolePrinter implements Printer {
         System.out.println("------------------------------------");
 
         System.out.println("Nazwa pliku: " + dataReport.getNameFile());
-        }
+    }
 }
