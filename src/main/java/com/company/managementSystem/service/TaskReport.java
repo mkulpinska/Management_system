@@ -21,9 +21,11 @@ public class TaskReport implements Report {
 
         List<TaskSummaryRecord> ts = session.createQuery(
                 "select new com.company.managementSystem.dto.TaskSummaryRecord(wr.task, sum(wr.timeInHours)) " +
-                        "from WorkRecord wr group by wr.task",
+                        "from WorkRecord wr group by wr.task " +
+                        "order by sum(wr.timeInHours) desc",
                 TaskSummaryRecord.class
         ).list();
+
 
         dataReport.setRows(ts);
         dataReport.setDescription("Task Report Description");
@@ -34,3 +36,5 @@ public class TaskReport implements Report {
         return dataReport;
     }
 }
+
+
