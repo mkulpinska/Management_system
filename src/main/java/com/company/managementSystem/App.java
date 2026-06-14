@@ -21,9 +21,7 @@ public class App {
         boolean runTaskReport = false;
         Printer printer = new ConsolePrinter();
 
-        //String filePath = args[0];
-
-        String path = "Reports/2025/07/";
+        String path = "Reports";
 
         for (String arg : args) {
             if (arg.equals("-g")) {
