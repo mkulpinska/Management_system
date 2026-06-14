@@ -23,7 +23,7 @@ public class App {
 
         //String filePath = args[0];
 
-        String path = "reports/2025/09/";
+        String path = "Reports/2025/07/";
 
         for (String arg : args) {
             if (arg.equals("-g")) {
@@ -62,28 +62,26 @@ public class App {
         Session session = DatabaseConnector.getInstance().getSession();
 
         if (runReadExcel) {
-            new ReadExcel(session).run();
-            if (runReadExcel) {
-                new ReadExcel(session).run();
-            }
-
-            if (runReadPdf) {
-                new ReadPdf(session).run();
-            }
-
-            if (runEmployeeReport) {
-                printer.printReport(new EmployeeReport(session).generateReport());
-            }
-
-            if (runProjectReport) {
-                printer.printReport(new ProjectReport(session).generateReport());
-            }
-
-            if (runTaskReport) {
-                printer.printReport(new TaskReport(session).generateReport());
-            }
-
-            DatabaseConnector.getInstance().teardown();
+            new ReadExcel(session).run(path);
         }
+
+        if (runReadPdf) {
+            new ReadPdf(session).run();
+        }
+
+        if (runEmployeeReport) {
+            printer.printReport(new EmployeeReport(session).generateReport());
+        }
+
+        if (runProjectReport) {
+            printer.printReport(new ProjectReport(session).generateReport());
+        }
+
+        if (runTaskReport) {
+            printer.printReport(new TaskReport(session).generateReport());
+        }
+
+        DatabaseConnector.getInstance().teardown();
+
     }
 }

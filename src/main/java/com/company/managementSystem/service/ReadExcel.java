@@ -23,12 +23,12 @@ public class ReadExcel {
         this.session = session;
     }
 
-    public void run() throws IOException {
+    public void run(String path) throws IOException {
 
         WorkRecords records = new WorkRecords();
 
-        File excelFile = new File("reports/2025/07/Markowska_Aleksandra.xls");
-       // File excelFile = new File(path);
+        File excelFile = new File(path +"Markowska_Aleksandra.xls");
+
 
         if (!excelFile.exists()) {
             throw new IOException("Plik nie został znaleziony: " + excelFile.getAbsolutePath());
