@@ -19,7 +19,7 @@ public class App {
 
         boolean runReadExcel = true;
         boolean runReadPdf = false;
-        boolean runEmployeeReport = true;
+        boolean runEmployeeReport = false;
         boolean runProjectReport = false;
         boolean runTaskReport = false;
         Printer printer = new PDFPrinter();
