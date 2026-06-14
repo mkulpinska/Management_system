@@ -17,13 +17,14 @@ public class PrintCSV implements Printer {
 
     @Override
     public void printReport(DataReport dataReport){
-        String fileName = dataReport.getNameFile();
+        String fileName = null;
+
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
         String timestamp = LocalDateTime.now().format(formatter);
 
         if (fileName == null || fileName.isBlank()) {
-            fileName = "report" + timestamp + ".csv";
+            fileName = timestamp + dataReport.getNameFile() + ".csv";
         }
 
         File outputDir = new File("exports");

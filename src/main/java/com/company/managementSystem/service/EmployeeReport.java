@@ -26,6 +26,7 @@ public class EmployeeReport implements Report {
         dataReport.setRows(es);
         dataReport.setDescription("Employee Report Description");
         dataReport.setTitle("Employee Report Title");
+        dataReport.setNameFile("EmployeeReport");
         dataReport.addColumnName("userName");
         dataReport.addColumnName("timeInHours");
         return  dataReport;

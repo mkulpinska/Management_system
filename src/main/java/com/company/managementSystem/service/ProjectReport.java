@@ -37,7 +37,9 @@ public class ProjectReport implements Report {
 
         dataReport.addColumnName("projectName");
         dataReport.addColumnName("timeInHours");
-        dataReport.addColumnName("dateRange");
+        dataReport.addColumnName("minDateRange");
+        dataReport.addColumnName("maxDateRange");
+        dataReport.setNameFile("ProjectReport");
 
         return dataReport;
     }

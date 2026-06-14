@@ -25,7 +25,7 @@ public class PDFPrinter implements Printer {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
         String timestamp = LocalDateTime.now().format(formatter);
 
-        String fileName = "report" + timestamp + ".pdf";
+        String fileName = timestamp + dataReport.getNameFile() + ".pdf";
         File outputFile = new File(outputDir, fileName);
 
         Document document = new Document();

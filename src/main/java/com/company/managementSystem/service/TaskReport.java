@@ -30,6 +30,7 @@ public class TaskReport implements Report {
         dataReport.setTitle("Task Report Title");
         dataReport.addColumnName("task");
         dataReport.addColumnName("timeInHours");
+        dataReport.setNameFile("TaskReport");
 
         return dataReport;
     }
