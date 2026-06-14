@@ -2,12 +2,12 @@ package com.company.managementSystem.presentation;
 
 import com.company.managementSystem.dto.ReportRow;
 import com.company.managementSystem.model.DataReport;
-import org.apache.poi.hssf.record.RowRecord;
-import org.apache.poi.ss.usermodel.Row;
 
 public class ConsolePrinter implements Printer {
 
+    @Override
     public void printReport(DataReport dataReport) {
+
         System.out.println("====================================");
         System.out.println(dataReport.getTitle());
         System.out.println("====================================");
@@ -15,33 +15,30 @@ public class ConsolePrinter implements Printer {
         System.out.println(dataReport.getDescription());
         System.out.println();
 
-        System.out.println("Kolumny:");
-
-        for (Object columnName : dataReport.getColumnNames()) {
+        // Nagłówki kolumn
+        for (String columnName : dataReport.getColumnNames()) {
             System.out.printf("%-25s", columnName);
         }
+        System.out.println();
 
-        String columns ="";
-        for(String column: dataReport.getColumnNames()){
-           columns = columns + " " + column;
+        // Separator pod nagłówkami
+        for (int i = 0; i < dataReport.getColumnNames().size(); i++) {
+            System.out.printf("%-25s", "--------------------");
         }
+        System.out.println();
 
+        // Wiersze danych
+        for (ReportRow row : dataReport.getRows()) {
+            String[] values = row.toStringArray();
 
-
-        for(ReportRow rowRecord: dataReport.getRows()) {
-
-            String[] values = rowRecord.toStringArray();
-
-            for (String value: values) {
-                System.out.print(value + " ");
-
+            for (String value : values) {
+                System.out.printf("%-25s", value);
             }
             System.out.println();
         }
 
         System.out.println();
         System.out.println("------------------------------------");
-
         System.out.println("Nazwa pliku: " + dataReport.getNameFile());
-        }
+    }
 }
