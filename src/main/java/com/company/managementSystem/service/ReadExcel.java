@@ -51,7 +51,6 @@ public class ReadExcel {
 
         File excelFile = new File(path);
 
-
         if (!excelFile.exists()) {
             throw new IOException("Plik nie został znaleziony: " + excelFile.getAbsolutePath());
         }
@@ -94,25 +93,29 @@ public class ReadExcel {
                             continue;
                         }
 
+                        // obsługa błędów komórki Excel
                         LocalDate date;
 
-                        if (DateUtil.isCellDateFormatted(dateCell)) {
+                        CellType cellType = dateCell.getCellType();
 
-                            date = dateCell
-                                    .getDateCellValue()
+                        if (cellType == CellType.NUMERIC && DateUtil.isCellDateFormatted(dateCell)) {
+
+                            date = dateCell.getDateCellValue()
                                     .toInstant()
                                     .atZone(ZoneId.systemDefault())
                                     .toLocalDate();
 
                         } else {
                             String dateStr = formatter.formatCellValue(dateCell).trim();
-                            System.out.println("DATA=[" + dateStr + "]");
+
+                            System.out.println("Typ=" + cellType + ", DATA=[" + dateStr + "]");
 
                             if (dateStr.isEmpty()) {
                                 continue;
                             }
                             date = LocalDate.parse(dateStr, dateFormatter);
                         }
+
                         String task = formatter.formatCellValue(taskCell).trim();
                         String hoursStr = formatter.formatCellValue(hoursCell).trim();
 
