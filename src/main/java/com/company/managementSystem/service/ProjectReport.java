@@ -15,8 +15,8 @@ public class ProjectReport implements Report {
     }
 
     @Override
-    public DataReport<ProjectSummaryRecord> generateReport() {
-        DataReport<ProjectSummaryRecord> dataReport = new DataReport<>();
+    public DataReport generateReport() {
+        DataReport dataReport = new DataReport();
 
         List<ProjectSummaryRecord> projectSummaries = session.createQuery(
                         "select new com.company.managementSystem.dto.ProjectSummaryRecord(" +
