@@ -15,10 +15,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 
 public class ReadExcel {
     private final Session session;
+
     public ReadExcel(Session session) {
         this.session = session;
     }
@@ -32,9 +34,13 @@ public class ReadExcel {
         WorkRecords records = new WorkRecords();
         File excelFile = new File("reports/2025/09/Kamiński_Michał.xls");
 
-        String userName = excelFile.getName().replace(".xls", "").replace("_", " ");;
-        String filePath = excelFile.getPath();
+        if (!excelFile.exists()) {
+            throw new IOException("Plik nie został znaleziony: " + excelFile.getAbsolutePath());
+        }
 
+        String userName = excelFile.getName().replace(".xls", "").replace("_", " ");
+
+        String filePath = excelFile.getPath();
 
 
         try (FileInputStream file = new FileInputStream(excelFile);
@@ -50,7 +56,7 @@ public class ReadExcel {
                     continue;
                 }
 
-                DataFormatter formatter = new DataFormatter();
+              /*  DataFormatter formatter = new DataFormatter();
                 String dateStr = formatter.formatCellValue(row.getCell(0));
                 String task = formatter.formatCellValue(row.getCell(1));
                 String hoursStr = formatter.formatCellValue(row.getCell(2));
@@ -59,16 +65,69 @@ public class ReadExcel {
                 int timeInHours = Integer.parseInt(hoursStr);
 
                 WorkRecord workRecord = new WorkRecord(date, task, timeInHours, userName, sheet.getSheetName(), filePath);
-                records.addRecord(workRecord);
+                records.addRecord(workRecord);*/
+                try {
+
+                    DataFormatter formatter = new DataFormatter();
+
+                    String dateStr = formatter.formatCellValue(row.getCell(0)).trim();
+                    String task = formatter.formatCellValue(row.getCell(1)).trim();
+                    String hoursStr = formatter.formatCellValue(row.getCell(2)).trim();
+
+                    if (dateStr.isEmpty() || task.isEmpty() || hoursStr.isEmpty()) {
+                        System.err.println("Pominięto wiersz "
+                                + (row.getRowNum() + 1)
+                                + " - brak danych.");
+                        continue;
+                    }
+
+                    LocalDate date = LocalDate.parse(
+                            dateStr,
+                            DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+
+                    int timeInHours = Integer.parseInt(hoursStr);
+
+                    WorkRecord workRecord = new WorkRecord(
+                            date,
+                            task,
+                            timeInHours,
+                            userName,
+                            sheet.getSheetName(),
+                            filePath);
+
+                    records.addRecord(workRecord);
+
+                } catch (DateTimeParseException e) {
+                    System.err.println("Błędna data w wierszu " + (row.getRowNum() + 1));
+
+                } catch (NumberFormatException e) {
+                    System.err.println("Błędna liczba godzin w wierszu " + (row.getRowNum() + 1));
+
+                } catch (Exception e) {System.err.println("Błąd w wierszu " + (row.getRowNum() + 1) + ": "
+                        + e.getMessage());
+                }
             }
         }
         System.out.println("Wczytano rekordów: " + records.getWorkRecords().size());
 
-        Transaction transaction = session.beginTransaction();
-        for (WorkRecord workRecord : records.getWorkRecords()) {
-            session.save(workRecord);
+
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+
+            for (WorkRecord workRecord : records.getWorkRecords()) {
+                session.save(workRecord);
+            }
+            session.flush();
+            transaction.commit();
+
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            System.err.println("Błąd zapisu do bazy danych: " + e.getMessage());
+            throw e;
         }
-        session.flush();
-        transaction.commit();
     }
 }
