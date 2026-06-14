@@ -1,0 +1,99 @@
+package com.company.managementSystem.presentation;
+
+import com.company.managementSystem.model.DataReport;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.util.List;
+
+import static org.springframework.security.util.FieldUtils.getFieldValue;
+
+public class PrintCSV implements Printer {
+
+    @Override
+    public void printReport(DataReport<?> dataReport){
+        String fileName = dataReport.getNameFile();
+
+        if (fileName == null || fileName.isBlank()) {
+            fileName = "report.csv";
+        }
+
+
+        File outputDir = new File("exports");
+
+        if (!outputDir.exists()) {
+            outputDir.mkdirs();
+        }
+
+        File outputFile = new File(outputDir, fileName);
+
+        try (FileWriter writer = new FileWriter(outputFile)) {
+
+            List<String> columns = dataReport.getColumnNames();
+
+            writeHeader(writer, columns);
+            writeRows(writer, dataReport, columns);
+
+            System.out.println("CSV exported to: " + outputFile.getAbsolutePath());
+
+        } catch (IOException e) {
+            System.out.println("Error while writing CSV file.");
+            e.printStackTrace();
+        }
+    }
+
+    private void writeHeader(FileWriter writer, List<String> columns) throws IOException {
+        for (int i = 0; i < columns.size(); i++) {
+            writer.write(columns.get(i));
+
+            if (i < columns.size() - 1) {
+                writer.write(";");
+            }
+        }
+
+        writer.write(System.lineSeparator());
+    }
+
+    private void writeRows(FileWriter writer, DataReport<?> dataReport, List<String> columns) throws IOException {
+        if (dataReport.getRows() == null) {
+            return;
+        }
+
+        for (Object row : dataReport.getRows()) {
+            for (int i = 0; i < columns.size(); i++) {
+                String column = columns.get(i);
+
+                Object value = getFieldValue(row, column);
+
+                if (value != null) {
+                    writer.write(value.toString());
+                }
+
+                if (i < columns.size() - 1) {
+                    writer.write(";");
+                }
+            }
+
+            writer.write(System.lineSeparator());
+        }
+    }
+
+    private Object getFieldValue(Object row, String column) {
+        try {
+            Field field = row.getClass().getDeclaredField(column);
+            field.setAccessible(true);
+
+            return field.get(row);
+
+        } catch (NoSuchFieldException e) {
+            System.out.println("Field not found: " + column);
+            return "";
+
+        } catch (IllegalAccessException e) {
+            System.out.println("Cannot access field: " + column);
+            return "";
+        }
+    }
+}
